@@ -33,9 +33,9 @@ TEXT = "#c9d1d9"
 GREEN = "#3fb950"
 
 # reveal timing (one-shot, no loop)
-COL_T = 0.014
-ROW_T = 0.035
-CELL_DUR = 0.35
+COL_T = 0.035
+ROW_T = 0.09
+CELL_DUR = 0.6
 
 
 def level_for(count):

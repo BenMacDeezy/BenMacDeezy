@@ -6,6 +6,11 @@ Building autonomous dev tooling and gamified developer experiences.
 
 [![GitHub](https://img.shields.io/badge/GitHub-BenMacDeezy-181717?style=flat&logo=github&logoColor=white)](https://github.com/BenMacDeezy)
 
+<br>
+
+<!-- regenerate: python scripts/prep_photo.py <photo> && python scripts/make_ascii_svg.py -->
+<img src="./ben-ascii.svg" width="420" alt="Ben MacD — ASCII portrait" />
+
 </div>
 
 <br>
