@@ -43,19 +43,33 @@ def esc(s):
     return html.escape(s)
 
 
+# NOTE: SMIL (<animate>/<animateTransform>) gets stripped by GitHub when this SVG
+# is embedded via <img> in a rendered profile README -- confirmed by testing live
+# on github.com, where it froze at the pre-animation opacity="0" attribute forever.
+# Plain CSS `<style>` + `@keyframes` (finite, no infinite loops) survives instead,
+# matching the one component (the heatmap) proven to render correctly live.
+RISE_DUR = 0.4
+
+
 def rise(inner, i):
     if STATIC:
         return f"<g>{inner}</g>"
     delay = 0.15 + i * 0.06
-    return (f'<g opacity="0" transform="translate(0,5)">{inner}'
-            f'<animate attributeName="opacity" from="0" to="1" begin="{delay:.2f}s" dur="0.4s" fill="freeze"/>'
-            f'<animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" '
-            f'begin="{delay:.2f}s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/></g>')
+    return f'<g class="rise" style="animation-delay:{delay:.2f}s">{inner}</g>'
 
+
+css = f"""
+@keyframes rise {{
+  from {{ opacity: 0; transform: translateY(5px); }}
+  to   {{ opacity: 1; transform: translateY(0); }}
+}}
+.rise {{ animation: rise {RISE_DUR:.2f}s cubic-bezier(.2,.8,.2,1) both; }}
+""".strip()
 
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
     f'font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">',
+] + ([] if STATIC else [f'<style>{css}</style>']) + [
     '<defs>'
     f'<linearGradient id="ibg" x1="0" y1="0" x2="0" y2="1">'
     f'<stop offset="0" stop-color="{BG2}"/><stop offset="1" stop-color="{BG}"/></linearGradient></defs>',

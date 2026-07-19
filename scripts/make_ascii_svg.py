@@ -64,12 +64,29 @@ for y in range(ROWS):
 
 art_top = TITLEBAR_H + PAD * 0.35
 
+# NOTE: GitHub strips SMIL (<animate>/<animateTransform>/<set>) from SVGs embedded
+# via <img> in a rendered README -- confirmed by testing live on github.com, where
+# rows/cards built with SMIL froze at their pre-animation (invisible) attribute
+# values. Plain CSS `<style>` + `@keyframes` (finite duration, no infinite loops)
+# survives and plays, matching the one component (the heatmap) proven to render
+# correctly live. So the reveal here is CSS-only, and the *unanimated* state
+# (in case `<style>` itself ever gets stripped too) must default to fully visible.
+css = f"""
+@keyframes typein {{
+  from {{ clip-path: inset(0 100% 0 0); }}
+  to   {{ clip-path: inset(0 0 0 0); }}
+}}
+.row {{ animation: typein {ROW_DUR:.2f}s linear both; }}
+""".strip()
+
 parts = []
 parts.append(
     f'<svg xmlns="http://www.w3.org/2000/svg" width="{CANVAS_W}" height="{CANVAS_H}" '
     f'viewBox="0 0 {CANVAS_W} {CANVAS_H}" font-family="ui-monospace, SFMono-Regular, '
     f'Menlo, Consolas, monospace">'
 )
+if not STATIC:
+    parts.append(f'<style>{css}</style>')
 parts.append('<defs>'
              f'<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">'
              f'<stop offset="0" stop-color="{BG2}"/><stop offset="1" stop-color="{BG}"/>'
@@ -88,7 +105,6 @@ parts.append(f'<text x="{CANVAS_W/2}" y="{TITLEBAR_H/2 + 4}" fill="{TITLE_TEXT}"
 font_size = CELL_H * 0.86
 for ry, line in enumerate(rows_txt):
     y = art_top + ry * CELL_H + CELL_H * 0.74
-    row_y = art_top + ry * CELL_H
     delay = ry * STAGGER
     safe = html.escape(line)
     text = (f'<text xml:space="preserve" x="{PAD}" y="{y:.1f}" fill="{INK}" '
@@ -98,28 +114,16 @@ for ry, line in enumerate(rows_txt):
         parts.append(text)
         continue
 
-    parts.append(
-        f'<clipPath id="r{ry}"><rect x="{PAD}" y="{row_y:.1f}" height="{CELL_H}" width="0">'
-        f'<animate attributeName="width" from="0" to="{ART_W}" begin="{delay:.3f}s" '
-        f'dur="{ROW_DUR:.2f}s" fill="freeze"/></rect></clipPath>'
-    )
-    parts.append(f'<g clip-path="url(#r{ry})">{text}</g>')
-    parts.append(
-        f'<rect y="{row_y+1:.1f}" width="{CELL_W}" height="{CELL_H-2}" fill="{CURSOR}" opacity="0">'
-        f'<animate attributeName="x" from="{PAD}" to="{PAD+ART_W}" begin="{delay:.3f}s" '
-        f'dur="{ROW_DUR:.2f}s" fill="freeze"/>'
-        f'<set attributeName="opacity" to="0.85" begin="{delay:.3f}s"/>'
-        f'<set attributeName="opacity" to="0" begin="{delay+ROW_DUR:.3f}s"/></rect>'
-    )
+    parts.append(f'<g class="row" style="animation-delay:{delay:.3f}s">{text}</g>')
 
 status_line_y = TITLEBAR_H + ART_H + PAD * 0.35
 status_y = status_line_y + 19
 parts.append(f'<line x1="0" y1="{status_line_y:.1f}" x2="{CANVAS_W}" y2="{status_line_y:.1f}" stroke="{FRAME}"/>')
 parts.append(f'<text x="{PAD}" y="{status_y:.1f}" fill="{TITLE_TEXT}" font-size="13">'
              f'{USER}@github:~$ whoami <tspan fill="{INK}">Ben MacD</tspan></text>')
-parts.append(f'<rect x="{PAD+196}" y="{status_y-12:.1f}" width="8" height="14" fill="{INK}">'
-             f'<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.51;1" '
-             f'dur="1s" repeatCount="indefinite"/></rect>')
+# static cursor block -- no blink (a looping animation is an easy target for
+# GitHub's sanitizer, and it's decorative, not worth the risk)
+parts.append(f'<rect x="{PAD+196}" y="{status_y-12:.1f}" width="8" height="14" fill="{INK}"/>')
 
 parts.append("</svg>")
 svg = "".join(parts)
