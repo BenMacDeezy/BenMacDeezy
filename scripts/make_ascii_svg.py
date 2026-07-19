@@ -35,8 +35,8 @@ TITLE_TEXT = "#7d8590"
 INK = "#c9d1d9"
 CURSOR = "#c9d1d9"
 
-ROW_DUR = 0.16
-STAGGER = 0.16
+ROW_DUR = 0.11
+STAGGER = 0.11
 
 im = Image.open(SRC).convert("L")
 if SHARPEN:

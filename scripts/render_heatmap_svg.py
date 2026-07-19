@@ -32,10 +32,14 @@ MUTED = "#8b949e"
 TEXT = "#c9d1d9"
 GREEN = "#3fb950"
 
-# reveal timing (one-shot, no loop)
-COL_T = 0.035
-ROW_T = 0.09
-CELL_DUR = 0.6
+# reveal timing (one-shot, no loop). NOTE: GitHub's embedding pipeline seems to
+# silently drop the whole <style> block if the animation's total elapsed time
+# (last delay + duration) gets too long -- confirmed by testing live: ~3.1s
+# total broke rendering entirely (content stayed at its pre-animation state)
+# even though the raw file rendered fine standalone. Stay well under that.
+COL_T = 0.022
+ROW_T = 0.05
+CELL_DUR = 0.45
 
 
 def level_for(count):
