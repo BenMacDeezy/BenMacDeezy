@@ -6,11 +6,6 @@ Building autonomous dev tooling and gamified developer experiences.
 
 [![GitHub](https://img.shields.io/badge/GitHub-BenMacDeezy-181717?style=flat&logo=github&logoColor=white)](https://github.com/BenMacDeezy)
 
-<br>
-
-<!-- regenerate: python scripts/prep_photo.py <photo> && python scripts/make_ascii_svg.py -->
-<img src="./ben-ascii.svg" width="420" alt="Ben MacD — ASCII portrait" />
-
 </div>
 
 <br>
@@ -19,6 +14,15 @@ Building autonomous dev tooling and gamified developer experiences.
 <img src="./contrib-heatmap.svg" width="720" alt="Ben's GitHub contribution graph" />
 
 <br>
+<br>
+
+<div align="center">
+
+<!-- regenerate: python scripts/prep_photo.py <photo> && python scripts/make_portrait_svg.py -->
+<img src="./ben-portrait.svg" width="340" alt="Ben MacD" />
+
+</div>
+
 <br>
 
 **Building:** [Örn's Forge](https://github.com/BenMacDeezy/Orns-Forge) — autonomous development plugin for Claude Code

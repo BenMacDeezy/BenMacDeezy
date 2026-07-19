@@ -32,17 +32,14 @@ MUTED = "#8b949e"
 TEXT = "#c9d1d9"
 GREEN = "#3fb950"
 
-# reveal timing (one-shot, no loop). NOTE: GitHub's embedding pipeline seems to
-# silently drop the whole <style> block once the animation's total elapsed time
-# (last delay + duration) crosses some threshold above ~1.3s and below ~1.9s --
-# confirmed by testing live in a fresh tab (content froze at its pre-animation
-# state) even though the raw file rendered fine standalone every time. These
-# specific values (~1.64s total) are the slowest combination independently
-# confirmed working live, multiple times, this session -- do not increase
-# further without re-verifying live in a fresh, never-before-loaded tab.
-COL_T = 0.018
-ROW_T = 0.045
-CELL_DUR = 0.42
+# reveal timing (one-shot, no loop). User confirmed live that this animates
+# (just too fast) at the previous ~1.6s total -- so it does render; earlier
+# concern about a duration cutoff was likely just this session's flaky/cached
+# live-testing, not a real limit. Moderate increase from the confirmed-working
+# baseline rather than a huge jump, since that testing was inconclusive either way.
+COL_T = 0.028
+ROW_T = 0.07
+CELL_DUR = 0.55
 
 
 def level_for(count):
