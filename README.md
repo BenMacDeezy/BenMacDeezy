@@ -17,15 +17,22 @@ Building autonomous dev tooling and gamified developer experiences.
 <br>
 
 <div align="center">
-
-<!-- regenerate: python scripts/prep_photo.py <photo> && python scripts/make_portrait_svg.py -->
-<img src="./ben-portrait.svg" width="340" alt="Ben MacD" />
-
+<table>
+<tr>
+<td align="center" width="50%">
+<a href="https://github.com/BenMacDeezy/Orns-Forge"><img src="./orns-forge-logo.png" width="150" /></a>
+<br><b>Örn's Forge</b>
+<br><sub>autonomous dev plugin for Claude Code</sub>
+</td>
+<td align="center" width="50%">
+<a href="https://github.com/BenMacDeezy/devmon"><img src="./devmon-logo.png" width="150" /></a>
+<br><b>devmon</b>
+<br><sub>gamified terminal creature-collection RPG</sub>
+</td>
+</tr>
+</table>
 </div>
 
 <br>
-
-**Building:** [Örn's Forge](https://github.com/BenMacDeezy/Orns-Forge) — autonomous development plugin for Claude Code
-**Also:** [devmon](https://github.com/BenMacDeezy/devmon) — gamified terminal creature-collection RPG
 
 **Stack:** Python · Claude Code / Agent SDK · GitHub Actions · self-hosted infra
