@@ -1,22 +1,22 @@
 {
   "username": "BenMacDeezy",
-  "generated_at": "2026-07-30T08:49:50Z",
+  "generated_at": "2026-07-31T09:16:11Z",
   "range": {
     "start": "2025-07-27",
+    "end": "2026-07-31"
+  },
+  "total_contributions": 7252,
+  "active_days": 158,
+  "avg_per_active_day": 45.9,
+  "current_streak": {
+    "length": 114,
+    "start": "2026-04-08",
     "end": "2026-07-30"
   },
-  "total_contributions": 7224,
-  "active_days": 157,
-  "avg_per_active_day": 46.0,
-  "current_streak": {
-    "length": 113,
-    "start": "2026-04-08",
-    "end": "2026-07-29"
-  },
   "longest_streak": {
-    "length": 113,
+    "length": 114,
     "start": "2026-04-08",
-    "end": "2026-07-29"
+    "end": "2026-07-30"
   },
   "best_day": {
     "date": "2026-06-01",
@@ -73,7 +73,7 @@
     },
     {
       "month": "2026-07",
-      "total": 1653
+      "total": 1681
     }
   ],
   "days": [
@@ -1523,7 +1523,7 @@
     },
     {
       "date": "2026-07-23",
-      "count": 79
+      "count": 82
     },
     {
       "date": "2026-07-24",
@@ -1547,10 +1547,14 @@
     },
     {
       "date": "2026-07-29",
-      "count": 1
+      "count": 16
     },
     {
       "date": "2026-07-30",
+      "count": 10
+    },
+    {
+      "date": "2026-07-31",
       "count": 0
     }
   ]
